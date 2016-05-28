@@ -1,0 +1,122 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+li {
+	list-style: none;
+	display: inline-block;
+}
+
+
+/* common style */
+.clear {
+	clear: both;
+}
+
+
+.wrap {
+	margin: 0 auto;
+	min-height: 600px;
+	background: #e5e4db;
+	overflow: hidden;
+}
+
+.say-wrap {
+	font-size: 0;
+	box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.1);
+	-webkit-box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.1);
+	margin-bottom: 25px;
+}
+.say-zone{
+	display: inline-block;
+	width: 90%;
+	height: 80px;
+	padding: 20px 15px;
+	/* padding: .85em 0.5em; */
+	resize: none;
+	box-sizing: border-box;
+	font-size: 18px;
+	border: none;
+}
+.say-zone:focus {
+	border: none;
+	outline: none;
+}
+.send {
+	display: inline-block;
+	height: 80px;
+	width: 10%;
+	max-width: 200px;
+	padding: 0;
+	font-size: 18px;
+	background: gray;
+	box-sizing: border-box;
+	vertical-align: top;
+	border: none;
+}
+
+.content {
+	/* width: 100%; */
+	text-align: center;
+	padding: 15px;
+}
+.tas-group {
+	font-size: 0;
+}
+.tas-item {
+	width: 250px;
+	min-height: 50px;
+	height: auto;
+	text-align: left;
+	font-size: 16px;
+	margin: 10px;
+	padding: 20px 20px 15px 20px;
+	background: #fff;
+	border-radius: 5px;
+	vertical-align: top;
+}
+.main-vote {
+	width: 100%;
+	margin: 15px 0;
+	/* font-size: 0; */
+}
+.up-vote, .down-vote {
+	/* display: inline-block; */
+	float: left;
+	width: 50%;
+	text-align: center;
+	height: 30px;
+	/* border: 1px solid #666; */
+	box-shadow: 0 0 0 1px rgba(0,0,0,.1) inset !important;
+	box-sizing: border-box;
+	line-height: 30px;
+	background: #f3f3f3;
+	cursor: pointer;
+}
+.up-vote:hover, .down-vote:hover {
+	background: #ccc;
+}
+.main-content {
+	margin: 10px 0;
+}
+.dragOver {
+	
+}
+
+
+#container {
+	display: none;
+}
+#username, #password {
+	height: 30px;
+	width: 100%;
+	margin-bottom: 15px;
+}
+.login-sub {
+	text-align: center;
+}
+.login-sub button {
+	border: none;
+	padding: 5px;
+
+}

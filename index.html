@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>tas</title>
+	<link rel="stylesheet" type="text/css" href="css/lib/normalize.css">
+	<link rel="stylesheet" type="text/css" href="css/tas.css">
+</head>
+<body>
+
+<div class="wrap">
+
+	<div class="say-wrap dragOver" id="dropZone">
+		<textarea class="say-zone"  placeholder="say someting"></textarea>
+		<button class="send">OK</button>
+	</div>
+	<div class="content">
+		<ul class="tas-group" id="tasGroup">
+<!-- 			<li class="tas-item">
+				<div class="main">
+					<div class="main-header">
+						Polande
+					</div>
+					<div class="main-vote">
+						<div class="up-vote"><span class="up-num">23</span>喜欢</div>
+						<div class="down-vote"><span class="down-num">3</span>讨厌</div>
+						<div class="clear"></div>
+					</div>
+					<div class="main-content">
+						杨绛的作品，我推荐大家先看看《干校六记》。
+					</div>
+					<div class="main-footer">
+						2016/05/25 
+					</div>
+				</div>
+			</li>
+			<li class="tas-item">
+				杨绛的作品，我推荐大家先看看《干校六记》。
+				杨绛的作品，我推荐大家先看看《干校六记》。
+				杨绛的作品，我推荐大家先看看《干校六记》。
+				杨绛的作品，我推荐大家先看看《干校六记》。
+				sw
+			</li>
+			<li class="tas-item">
+				sws	
+			</li>
+			<li class="tas-item login-item">
+				<div class="username">
+					<input type="text" name="username" placeholder="请填写用户名" id="username" />
+				</div>
+				<div class="password">
+					<input type="password" name="password" placeholder="输入密码" id="password" />
+				</div>
+				<div class="login-sub">
+					<button id="loginBtn">登录</button>
+				</div>
+			</li> -->
+
+		</ul>
+	</div>
+
+</div>
+<div class="user-wrap">
+		<span class="login-name"></span>
+</div>
+
+<script type="text/html" id="item">
+{{each data as value index}}
+	<li class="tas-item" data-id={{value.uuid}}>
+		<div class="main">
+			<div class="main-header">
+				{{value.u_name}}
+			</div>
+			<div class="main-vote">
+				<div class="up-vote"><span class="up-num">{{value.w_up}}</span>喜欢</div>
+				<div class="down-vote"><span class="down-num">{{value.w_down}}</span>讨厌</div>
+				<div class="clear"></div>
+			</div>
+			<div class="main-content">
+				{{value.content}}
+			</div>
+			<div class="main-footer">
+				{{value.time | dateFormat:'yyyy/MM/dd  hh:mm'}}
+			</div>
+		</div>
+	</li>
+{{/each}}
+
+</script>
+
+<div class="upload-pic-content" id="container">
+	<div class="ipt-upload-pic">
+		<input type="file" class="form-control" id="expertPic" >
+	</div>
+</div>
+
+<script type="text/javascript" src="js/lib/upload/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="js/lib/upload/plupload/plupload.full.min.js"></script>
+<script type="text/javascript" src="js/lib/upload/plupload/i18n/zh_CN.js"></script>
+<script type="text/javascript" src="js/lib/upload/qiniu.js"></script>
+<script type="text/javascript" src="js/lib/template.js"></script>
+<script type="text/javascript" src="js/tpl.helper.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
+<script type="text/javascript">
+
+	$(function() {
+		//https://github.com/qiniu/js-sdk
+	    var uploader = Qiniu.uploader({
+	        runtimes: 'html5,flash,html4',
+	        browse_button: 'expertPic',
+	        container: 'dropZone',
+	        drop_element: 'dropZone',
+	        max_file_size: '4mb',
+	        flash_swf_url: '/upload/plupload/Moxie.swf',
+	        dragdrop: true,
+	        drop_element: 'dropZone',        //拖曳上传区域元素的ID，拖曳文件或文件夹后可触发上传
+	        chunk_size: '2mb',
+	        auto_start: true,                 //选择文件后自动上传，若关闭需要自己绑定事件触发上传
+	        uptoken_url: 'http://localhost:3000/api/v1/upload/token',
+	        domain: 'http://7xl9qr.com1.z0.glb.clouddn.com/',
+	        unique_names: true, // 默认false，key为文件名。若开启该选项，SDK为自动生成上传成功后的key（文件名）。
+	        get_new_uptoken: false,  //设置上传文件的时候是否每次都重新获取新的token
+	        max_retries: 3,                   //上传失败最大重试次数
+	        init: {
+	            'FilesAdded': function(up, files) {
+	                plupload.each(files, function(file) {
+	                    // 文件添加进队列后,处理相关的事情
+	                    // 前端先简单判断类型根据后缀
+	                });
+	            },
+	            'BeforeUpload': function(up, file) {
+	                   // 每个文件上传前,处理相关的事情
+	                   // 增加loading.gif
+	            },
+	            'UploadProgress': function(up, file) {
+	                   // 每个文件上传时,处理相关的事情
+
+	            },
+	            'FileUploaded': function(up, file, info) {
+	                   // 每个文件上传成功后,处理相关的事情
+	                   // 其中 info 是文件上传成功后，服务端返回的json，形式如
+	                   // {
+	                   //    "hash": "Fh8xVqod2MQ1mocfI4S4KpRL6D98",
+	                   //    "key": "gogopher.jpg"
+	                   //  }
+	                   // 参考http://developer.qiniu.com/docs/v6/api/overview/up/response/simple-response.html
+	                   fileBool = true;
+	                   var domain = up.getOption('domain');
+	                   var res = JSON.parse(info);
+
+	                   var sourceLink = domain + res.key;  //获取上传成功后的文件的Url
+		            	$('.ipt-upload-pic').hide();
+	                   $('#container').css('background', 'none').append('<img class="preview-img" src="' + sourceLink + '"><div class="del-img-tips">点击重新上传</div>');
+	                   $('div').remove('.my-pic-tips');
+
+	                   //ajax post qiniu url
+	                   // $.ajax({
+		                  //  	url: ,
+		                  //  	data: {url: sourceLink},
+		                  //  	method: 'POST',
+		                  //  	success: function(data) {
+
+		                  //  	},
+		                  //  	error: function(err) {
+		                   		
+		                  //  	}
+	                   // })
+	            },
+	            'Error': function(up, err, errTip) {
+	                   //上传出错时,处理相关的事情
+	            },
+	            'UploadComplete': function() {
+	                   //队列文件处理完毕后,处理相关的事情
+	            },
+	            'Key': function(up, file) {
+	                // 若想在前端对每个文件的key进行个性化处理，可以配置该函数
+	                // 该配置必须要在 unique_names: false , save_key: false 时才生效
+	                var key = "";
+	                // do something with key here
+	                return key
+	            }
+	        },
+	    });
+
+	    uploader.bind('FileUploaded', function() {
+	        console.log('hello man,a file is uploaded');
+	    });
+
+	});
+</script>
+</body>
+</html>

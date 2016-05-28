@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<!--if lt IE 7html(class="no-js ie6 oldie", lang="en") -->
+<!--if IE 7html(class="no-js ie7 oldie", lang="en") -->
+<!--if IE 8html(class="no-js ie8 oldie", lang="en") -->
+<!-- [if gt IE 8] <!-->
+<html lang="en" class="no-js">
+  <!-- <![endif]-->
+  <head>
+    <meta name="description" content="All the words will gone, only the void forever lone"/>
+    <meta name="keywords" content="Perber"/>
+    <meta name="author" content="J.Y Han(naoyeye)"/>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1, user-scalable=no, minimal-ui"/>
+    <link rel="stylesheet" href="/css/semantic.min.css"/>
+    <link rel="stylesheet" href="/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="/css/perber.css"/>
+    <link rel="stylesheet" href="/css/player.zen.css"/>
+    <script src="/js/libs/jquery-2.0.3.min.js"></script>
+    <script src="/js/libs/modernizr-2.5.3.min.js"></script>
+  </head>
+  <body>
+
+<!--extends layout-->
+<div class="wrap">
+  <div role="main" class="content">
+    <div id="onlineCount"><span id="number"></span><span id="action"></span></div>
+    <ul id="Tips">
+      <li id="about"><i class="fa fa-circle-o"></i><span>关于 Perber</span></li>
+      <li id="usage"><i class="fa fa-question-circle"></i><span>怎么玩儿</span></li>
+    </ul>
+    <div id="drop_zone" data-bucket="undefined" class="chat-input">
+      <div class="ui form">
+        <div class="field">
+          <textarea placeholder="说点什么？" maxlength="240"></textarea>
+        </div>
+      </div>
+      <div id="upimg"></div>
+    </div>
+    <div class="chat-list">
+      <div id="important">
+        <div class="chat-box">
+          
+          <div class="fixed_block card_3">
+            <div title="友情置顶" class="ui right teal corner label"><i class="fa-smile-o fa"></i></div>
+            <div class="ta_cont">
+              <h4>你觉得自己好不好看？</h4>
+              <p>好看就点头，不好看就摇头<br> 哈哈哈哈</p>
+              <div id="vote_bar"></div>
+              <div id="vote_info">此调查会在某月某日截止</div>
+            </div>
+          </div>
+          <div class="fixed_block card_1">
+            <div title="友情置顶" class="ui right teal corner label"><i class="fa-star fa"></i></div>
+            <div class="imgbox">
+              <div class="ta_cont">
+                <p style="font-size:12px; text-align:center;"><a href="http://han.im/" target="_blank"><i style="display:block;width:40px;height:40px;background:url(http://img3.douban.com/icon/ul1203352-424.jpg) center center no-repeat; background-size:45px;border-radius:50%;margin: 0 auto;margin-bottom:10px;border:1px solid #7bb487;"></i>http://han.im</a></p>
+              </div>
+            </div>
+          </div>
+          <div class="fixed_block card_1">
+            <div title="友情置顶" class="ui right teal corner label"><i class="fa-star fa"></i></div>
+            <div class="imgbox">
+              <div class="ta_cont">
+                <p style="font-size:12px; text-align:center;"><a href="http://biubiubiubiu.com/" target="_blank"><i style="display: block;width: 40px;height: 40px;margin: 0 auto;margin-bottom: 10px;font-size: 14px;font-style: normal;color: #fff;font-weight: bold;line-height: 40px;background: #333;border-radius: 50%;">Biu</i>http://biubiubiubiu.com</a></p>
+              </div>
+            </div>
+          </div>
+          <div class="fixed_block null">
+            <div id="front">
+              <div title="虚位以待" class="ui right teal corner label"><i class="fa-lock fa"></i></div>
+              <div class="imgbox"><a href="javascript:void(0);" class="ta_cover"></a></div>
+            </div>
+            <div id="back">
+              <div id="back2front" title="返回" class="circular ui icon button"><i class="fa fa-chevron-left"></i></div>
+              <div class="ui form">
+                <div class="ui message">
+                  <ul class="list">
+                    <li>这个位置是对外开放的，你可以申请在这里放上一张图片，或者一个网站链接，也可以是一段文字。</li>
+                  </ul>
+                </div>
+                <div class="field">
+                  <label>你叫啥(网名之类的称呼也可以)</label>
+                  <input id="input_name" type="text" placeholder="输入称呼" name="name" maxlength="20"/>
+                </div>
+                <div class="field">
+                  <label>邮箱地址(*必填)</label>
+                  <input id="input_email" type="email" placeholder="输入邮箱地址" name="email"/>
+                </div>
+                <div style="text-align:center" class="field">
+                  <div id="applyBtn" class="ui button green">写好了，提交</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="chat"></div>
+    </div>
+  </div>
+
+</div>
+<div class="noticeWrap"></div>
+
+<!--include templates/chat_tmpl-->
+<script src="/js/libs/jquery.browser.min.js"></script>
+<script src="/js/player/player.jquery.rotate.js"></script>
+<script src="/js/player/player.jquery.grab.js"></script>
+<script src="/js/player/player.jquery.jplayer.min.js"></script>
+<script src="/js/player/zenplayer.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script defer="defer" src="/js/plugins.min.js"></script>
+<script defer="defer" src="/js/perber.js"></script>
+
+  </body>
+</html>

@@ -5,15 +5,28 @@
 	<title>tas</title>
 	<link rel="stylesheet" type="text/css" href="css/lib/normalize.css">
 	<link rel="stylesheet" type="text/css" href="css/tas.css">
+	<link rel="stylesheet" type="text/css" href="css/perber.css">
 </head>
 <body>
 
 <div class="wrap">
 
-	<div class="say-wrap dragOver" id="dropZone">
-		<textarea class="say-zone"  placeholder="say someting"></textarea>
+<div id="dropZone" data-bucket="perber" class="chat-input">
+	<div class="ui form ">
+		<div class="field say-zone">
+			<textarea placeholder="说点什么？" class="say-zone main-content" maxlength="240"></textarea>
+		</div>
 		<button class="send">OK</button>
+
 	</div>
+	<div id="upimg"></div>
+</div>
+
+<!-- 	<div class="say-wrap" id="dropZone">
+		<textarea class="say-zone"  placeholder="say someting"></textarea>
+		<div class="up-img" id="upImg"><div class="up-img-content">图片拖拽到这里</div></div>
+		<button class="send">OK</button>
+	</div> -->
 	<div class="content">
 		<ul class="tas-group" id="tasGroup">
 <!-- 			<li class="tas-item">
@@ -60,27 +73,43 @@
 	</div>
 
 </div>
+			<li class="tas-item login-item">
+				<div class="username">
+					<input type="text" name="username" placeholder="请填写用户名" id="username" />
+				</div>
+				<div class="password">
+					<input type="password" name="password" placeholder="输入密码" id="password" />
+				</div>
+				<div class="login-sub">
+					<button id="loginBtn">登录</button>
+				</div>
+			</li> 
 <div class="user-wrap">
 		<span class="login-name"></span>
 </div>
-
 <script type="text/html" id="item">
 {{each data as value index}}
-	<li class="tas-item" data-id={{value.uuid}}>
+	<li class="tas-item like-{{value.isUp + value.isDown}}" data-id={{value.uuid}}>
 		<div class="main">
 			<div class="main-header">
 				{{value.u_name}}
 			</div>
 			<div class="main-vote">
-				<div class="up-vote"><span class="up-num">{{value.w_up}}</span>喜欢</div>
-				<div class="down-vote"><span class="down-num">{{value.w_down}}</span>讨厌</div>
+				<div class="up-vote up-{{value.isUp}}"><span class="up-num">{{value.up}}</span>喜欢</div>
+				<div class="down-vote down-{{value.isDown}}"><span class="down-num">{{value.down}}</span>讨厌</div>
 				<div class="clear"></div>
 			</div>
 			<div class="main-content">
-				{{value.content}}
+				{{if value.type == 'image'}}
+					<img class="item-image" src="{{value.url}}">
+				{{else}}
+					{{value.content}}
+				{{/if}}
 			</div>
 			<div class="main-footer">
-				{{value.time | dateFormat:'yyyy/MM/dd  hh:mm'}}
+				<div class="time">
+					{{value.time | dateFormat:'yyyy/MM/dd  hh:mm'}}
+				</div>
 			</div>
 		</div>
 	</li>
@@ -154,17 +183,22 @@
 	                   $('div').remove('.my-pic-tips');
 
 	                   //ajax post qiniu url
-	                   // $.ajax({
-		                  //  	url: ,
-		                  //  	data: {url: sourceLink},
-		                  //  	method: 'POST',
-		                  //  	success: function(data) {
-
-		                  //  	},
-		                  //  	error: function(err) {
+	                   var data = {
+	                   		url: sourceLink,
+	                   		type: 'image',
+	                   		token: window.localStorage.getItem('token')
+	                   };
+	                   $.ajax({
+		                   	url: 'http://localhost:3000/api/v1/say/item',
+		                   	data: data,
+		                   	method: 'POST',
+		                   	success: function(data) {
+		                   		console.log(data);
+		                   	},
+		                   	error: function(err) {
 		                   		
-		                  //  	}
-	                   // })
+		                   	}
+	                   })
 	            },
 	            'Error': function(up, err, errTip) {
 	                   //上传出错时,处理相关的事情

@@ -31,12 +31,16 @@ li {
 	display: inline-block;
 	width: 90%;
 	height: 80px;
-	padding: 20px 15px;
+	padding: 15px 15px;
 	/* padding: .85em 0.5em; */
 	resize: none;
 	box-sizing: border-box;
 	font-size: 18px;
 	border: none;
+
+}
+.ui.form {
+	font-size: 0;
 }
 .say-zone:focus {
 	border: none;
@@ -49,7 +53,7 @@ li {
 	max-width: 200px;
 	padding: 0;
 	font-size: 18px;
-	background: gray;
+	background: #BFBFBF;
 	box-sizing: border-box;
 	vertical-align: top;
 	border: none;
@@ -59,6 +63,7 @@ li {
 	/* width: 100%; */
 	text-align: center;
 	padding: 15px;
+	margin-top: 80px;
 }
 .tas-group {
 	font-size: 0;
@@ -91,22 +96,29 @@ li {
 	box-sizing: border-box;
 	line-height: 30px;
 	background: #f3f3f3;
-	cursor: pointer;
 }
-.up-vote:hover, .down-vote:hover {
+
+.like-0 .up-vote:hover, .like-0 .down-vote:hover {
 	background: #ccc;
 }
+.like-0 .up-vote, .like-0 .down-vote {
+	cursor: pointer;
+}
+.up-1, .down-1 {
+	background: #ccc;
+}
+
 .main-content {
 	margin: 10px 0;
 }
-.dragOver {
-	
+.item-image {
+	width: 100%;
 }
-
 
 #container {
 	display: none;
 }
+
 #username, #password {
 	height: 30px;
 	width: 100%;
@@ -118,5 +130,7 @@ li {
 .login-sub button {
 	border: none;
 	padding: 5px;
-
+}
+.main-footer .time {
+	font-size: 14px;
 }

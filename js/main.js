@@ -1,4 +1,9 @@
 $(function() {
+
+	$('.close-btn i').click(function() {
+		$('.dialog-wrap, .dialog-bg').remove();
+	});
+
 	$('#loginBtn').click(function() {
 		var username = $('#username').val();
 		var password = $('#password').val();
@@ -17,7 +22,9 @@ $(function() {
 				if(data.code === 200) {
 					$('.login-item').remove();
 					localStorage.setItem('token', data.token);
-					$('.login-name').text(data.data.username);
+					localStorage.setItem('userInfo', JSON.stringify(data.data));
+					$('.dialog-wrap, .dialog-bg').remove();
+					$('.login-btn').off('click').text(data.data.username);
 				}
 			},
 			error: function(err) {
@@ -59,11 +66,51 @@ $(function() {
 		}
 	});
 
+
 	//render items
 	//el ID
 	function renderData(data) {
-		var html = template('item', data);
+		var source = '{{each data as value index}}'
+						+ '<li class="tas-item like-{{value.isUp + value.isDown}}" data-id={{value.uuid}}>'
+							+ '<div class="main">'
+								+ '<div class="main-header">'
+									+ '{{value.u_name}}'
+								+ '</div>'
+								+ '<div class="main-vote">'
+									+ '<div class="up-vote up-{{value.isUp}}"><span class="up-num">{{value.up}}</span>点头</div>'
+									+ '<div class="down-vote down-{{value.isDown}}"><span class="down-num">{{value.down}}</span>摇头</div>'
+									+ '<div class="clear"></div>'
+								+ '</div>'
+								+ '<div class="main-content">'
+									+ '{{if value.type == "image"}}'
+										+ '<img class="item-image" src="{{value.url}}">'
+									+ '{{else}}'
+										+ '{{value.content}}'
+									+ '{{/if}}'
+								+ '</div>'
+								+ '<div class="main-footer">'
+									+ '<div class="time">'
+										+ '{{value.time | dateFormat:"yyyy/MM/dd  hh:mm"}}'
+									+ '</div>'
+								+ '</div>'
+							+ '</div>'
+						+ '</li>'
+					+'{{/each}}';
+		var render = template.compile(source);
+		var html = render(data);
 		document.getElementById('tasGroup').innerHTML = html;
+		// setHeight();
+
+		$('.tas-group').masonry({
+	    	itemSelector: '.tas-item',
+	    	columnWidth: 240,
+	    	gutter: 10,
+
+	    	isAnimated: true
+	    });
+		// var html = template('item', data);
+		// document.getElementById('tasGroup').innerHTML = html;
+
 	}
 
     function handleDragOver(evt) {
@@ -102,7 +149,6 @@ $(function() {
 
     //upVote 
     $('body').on('click', '.like-0 .up-vote', function() {
-    	console.log('lll');
     	var data = {
     		uuid: $(this).parents('.tas-item').data('id'),
     		token: localStorage.getItem('token')
@@ -142,5 +188,31 @@ $(function() {
     		}
     	});
     });
+
+    //render height
+    function setHeight() {
+    	var $item = $('.tas-item');
+
+	    for(var i = 4; i < $item.length; i++) {
+	    	console.log(i);
+	    	$item.eq(i).css('top', $item.eq(i-4).outerHeight() + 110 );
+	    }    	
+    }
+
+    function　initData() {
+    	var userInfo = JSON.parse(window.localStorage.getItem('userInfo'));
+    	console.log(userInfo);
+    	if(userInfo.username) {
+    		$('.login-btn').text(userInfo.username);
+    		$('.login-btn').off('click');
+    	} else {
+    		$('body').on('click', '.login-btn', function() {
+				$('.dialog-bg').show();
+				$('.dialog-wrap').css('display','flex');
+			});
+    	}
+    }
+
+    initData();
 
 });

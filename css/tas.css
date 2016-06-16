@@ -7,17 +7,15 @@ li {
 	display: inline-block;
 }
 
-
 /* common style */
 .clear {
 	clear: both;
 }
 
-
 .wrap {
 	margin: 0 auto;
-	min-height: 600px;
-	background: #e5e4db;
+	min-height: 600px;																				
+	background: #E9E9E9;
 	overflow: hidden;
 }
 
@@ -37,7 +35,6 @@ li {
 	box-sizing: border-box;
 	font-size: 18px;
 	border: none;
-
 }
 .ui.form {
 	font-size: 0;
@@ -59,27 +56,123 @@ li {
 	border: none;
 }
 
+.login-btn {
+	position: fixed;
+	width: 50px;
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+	font-style: 14px;
+	z-index: 1000;
+	border-radius: 50%;
+	left: 0;
+	top: 200px;
+	background: #fff;
+	box-shadow: 0 1px 2px 0 rgba(0,0,0,0.22);
+	-webkit-box-shadow: 0 1px 2px 0 rgba(0,0,0,0.22);
+	cursor: pointer;
+}
+
+.login-btn:hover {
+	background: #f5f5f5;
+}
+.dialog-bg {
+
+	position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 10001;
+    min-height: 100%!important;
+    width: 100%!important;
+    height: 100%!important;
+    overflow: visible;
+    background: #666;
+    opacity: .5;
+
+	display: none;
+
+}
+.dialog-wrap {
+
+	display: -webkit-flex;
+    display: -ms-flexbox;
+    display: -webkit-box;
+    display: flex;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-align-items: flex-start;
+    -ms-flex-align: start;
+    -webkit-box-align: start;
+    align-items: center;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10002;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+
+	display: none;
+
+}
+.login-item {
+	/* position: absolute; */
+    z-index: 10002;
+    width: 420px;
+    max-width: 100%;
+    border-radius: 8px;
+    border: 1px solid #888;
+    box-shadow: 0 0 80px 0 rgba(0,0,0,.4);
+    background: #fff;
+    text-align: left;
+}
+.close-btn {
+	height: 25px;
+	width: 100%;
+	position: relative;
+}
+.close-btn i {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    right: -18px;
+    top: -3px;
+    cursor: pointer;
+    margin: -10px 0 0 -10px;
+    background: url(../img/msg_close.png) 0 0 no-repeat;
+}
 .content {
 	/* width: 100%; */
-	text-align: center;
+	/* text-align: center; */
 	padding: 15px;
 	margin-top: 80px;
 }
 .tas-group {
+	width: 1240px;
 	font-size: 0;
+	// border: 1px solid gray;
+	margin: 0 auto;
 }
 .tas-item {
-	width: 250px;
+	width: 240px;
+	// width: 25%;
 	min-height: 50px;
 	height: auto;
 	text-align: left;
 	font-size: 16px;
-	margin: 10px;
-	padding: 20px 20px 15px 20px;
+	margin-bottom: 10px;
+	padding: 15px;
+	box-sizing: border-box;
 	background: #fff;
 	border-radius: 5px;
 	vertical-align: top;
+	// position: absolute;
 }
+
 .main-vote {
 	width: 100%;
 	margin: 15px 0;

@@ -10,7 +10,7 @@
 <body>
 
 <div class="wrap">
-
+<div class="login-btn btn">Login</div>
 <div id="dropZone" data-bucket="perber" class="chat-input">
 	<div class="ui form ">
 		<div class="field say-zone">
@@ -22,68 +22,29 @@
 	<div id="upimg"></div>
 </div>
 
-<!-- 	<div class="say-wrap" id="dropZone">
-		<textarea class="say-zone"  placeholder="say someting"></textarea>
-		<div class="up-img" id="upImg"><div class="up-img-content">图片拖拽到这里</div></div>
-		<button class="send">OK</button>
-	</div> -->
 	<div class="content">
 		<ul class="tas-group" id="tasGroup">
-<!-- 			<li class="tas-item">
-				<div class="main">
-					<div class="main-header">
-						Polande
-					</div>
-					<div class="main-vote">
-						<div class="up-vote"><span class="up-num">23</span>喜欢</div>
-						<div class="down-vote"><span class="down-num">3</span>讨厌</div>
-						<div class="clear"></div>
-					</div>
-					<div class="main-content">
-						杨绛的作品，我推荐大家先看看《干校六记》。
-					</div>
-					<div class="main-footer">
-						2016/05/25 
-					</div>
-				</div>
-			</li>
-			<li class="tas-item">
-				杨绛的作品，我推荐大家先看看《干校六记》。
-				杨绛的作品，我推荐大家先看看《干校六记》。
-				杨绛的作品，我推荐大家先看看《干校六记》。
-				杨绛的作品，我推荐大家先看看《干校六记》。
-				sw
-			</li>
-			<li class="tas-item">
-				sws	
-			</li>
-			<li class="tas-item login-item">
-				<div class="username">
-					<input type="text" name="username" placeholder="请填写用户名" id="username" />
-				</div>
-				<div class="password">
-					<input type="password" name="password" placeholder="输入密码" id="password" />
-				</div>
-				<div class="login-sub">
-					<button id="loginBtn">登录</button>
-				</div>
-			</li> -->
 
 		</ul>
 	</div>
 
 </div>
-			<li class="tas-item login-item">
-				<div class="username">
-					<input type="text" name="username" placeholder="请填写用户名" id="username" />
-				</div>
-				<div class="password">
-					<input type="password" name="password" placeholder="输入密码" id="password" />
-				</div>
-				<div class="login-sub">
-					<button id="loginBtn">登录</button>
-				</div>
-			</li> 
+<div class="dialog-bg"></div>
+
+<div class="dialog-wrap">
+	<div class="tas-item login-item">
+		<div class="close-btn btn"><i></i></div>
+		<div class="username">
+			<input type="text" name="username" placeholder="请填写用户名" id="username" />
+		</div>
+		<div class="password">
+			<input type="password" name="password" placeholder="输入密码" id="password" />
+		</div>
+		<div class="login-sub">
+			<button id="loginBtn">登录</button>
+		</div>
+	</div> 
+</div>
 <div class="user-wrap">
 		<span class="login-name"></span>
 </div>
@@ -128,6 +89,7 @@
 <script type="text/javascript" src="js/lib/upload/plupload/i18n/zh_CN.js"></script>
 <script type="text/javascript" src="js/lib/upload/qiniu.js"></script>
 <script type="text/javascript" src="js/lib/template.js"></script>
+<script type="text/javascript" src="js/lib/masonry.pkgd.js"></script>
 <script type="text/javascript" src="js/tpl.helper.js"></script>
 <script type="text/javascript" src="js/main.js"></script>
 <script type="text/javascript">
@@ -178,9 +140,6 @@
 	                   var res = JSON.parse(info);
 
 	                   var sourceLink = domain + res.key;  //获取上传成功后的文件的Url
-		            	$('.ipt-upload-pic').hide();
-	                   $('#container').css('background', 'none').append('<img class="preview-img" src="' + sourceLink + '"><div class="del-img-tips">点击重新上传</div>');
-	                   $('div').remove('.my-pic-tips');
 
 	                   //ajax post qiniu url
 	                   var data = {

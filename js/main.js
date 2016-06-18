@@ -23,8 +23,12 @@ $(function() {
 					$('.login-item').remove();
 					localStorage.setItem('token', data.token);
 					localStorage.setItem('userInfo', JSON.stringify(data.data));
-					$('.dialog-wrap, .dialog-bg').remove();
-					$('.login-btn').off('click').text(data.data.username);
+					window.location.reload();
+					// $('.dialog-wrap, .dialog-bg').remove();
+					// $('.login-btn').off('click').text(data.data.username);
+				} else {
+					var html = '<div class="login-err">用户名或密码错误</div>';
+					$('.login-sub').before(html);
 				}
 			},
 			error: function(err) {
@@ -65,7 +69,6 @@ $(function() {
 			console.log(err);
 		}
 	});
-
 
 	//render items
 	//el ID
@@ -201,7 +204,6 @@ $(function() {
 
     function　initData() {
     	var userInfo = JSON.parse(window.localStorage.getItem('userInfo'));
-    	console.log(userInfo);
     	if(userInfo && userInfo.username) {
     		$('.login-btn').text(userInfo.username);
     		$('.login-btn').off('click');
@@ -214,5 +216,61 @@ $(function() {
     }
 
     initData();
+
+    /**
+	 * 登录注册操作
+	 */
+	 $('.toggle-tip').click(function() {
+
+	 	if($(this).data('login') == 1) {
+	    	$('.toggle-tip').data('login', 0);
+
+	    	$('.login-wrap').hide();
+	    	$('.register-wrap').show();
+	    	$(this).text('已有账号，登录');
+	 	} else {
+	    	$('.toggle-tip').data('login', 1);
+	    	$('.register-wrap').hide();
+	 		$('.login-wrap').show();
+	    	$(this).text('立即注册');	
+	 	}
+	 })
+
+	 //注册数据　
+	$('#RegisterBtn').click(function() {
+		var username = $('#RUsername').val();
+		var password = $('#RPassword').val();
+		var email = $('#REmail').val();
+
+		var data = {
+			username: username,
+			password: password,
+			email: email
+		};
+
+		$.ajax({
+			method: 'POST',
+			url: 'http://localhost:3000/api/v1/user/register',
+			data: data,
+			success: function(data) {
+				console.log(data);
+				if(data.code === 200) {
+					$('.login-item').remove();
+					localStorage.setItem('token', data.token);
+					localStorage.setItem('userInfo', JSON.stringify(data.data));
+					// window.location.reload();
+					// $('.dialog-wrap, .dialog-bg').remove();
+					// $('.login-btn').off('click').text(data.data.username);
+				} else {
+					var html = '<div class="login-err">用户名或密码错误</div>';
+					$('.login-sub').before(html);
+				}
+			},
+			error: function(err) {
+				console.log(err);
+			}
+		})
+	});
+
 
 });

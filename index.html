@@ -33,16 +33,41 @@
 
 <div class="dialog-wrap">
 	<div class="tas-item login-item">
-		<div class="close-btn btn"><i></i></div>
-		<div class="username">
-			<input type="text" name="username" placeholder="请填写用户名" id="username" />
+
+		<div class="close-btn btn">
+			<span class="toggle-tip" data-login="1">立即注册</span>
+			<i></i>
 		</div>
-		<div class="password">
-			<input type="password" name="password" placeholder="输入密码" id="password" />
+		<div class="login-wrap">
+			<div class="username">
+				<input type="text" name="username" placeholder="请填写用户名" id="username" />
+			</div>
+			<div class="password">
+				<input type="password" name="password" placeholder="输入密码" id="password" />
+			</div>
+			<div class="login-sub">
+				<button id="loginBtn">登录</button>
+			</div>
 		</div>
-		<div class="login-sub">
-			<button id="loginBtn">登录</button>
+
+		<!-- register wrap -->
+		<div class="register-wrap">
+			<div class="username">
+				<input type="text" name="username" placeholder="请填写用户名" id="RUsername" />
+			</div>
+
+			<div class="email">
+				<input type="text" name="email" placeholder="请填邮箱" id="REmail" />
+			</div>
+
+			<div class="password">
+				<input type="password" name="password" placeholder="输入密码" id="RPassword" />
+			</div>
+			<div class="register-sub">
+				<button id="RegisterBtn">注册</button>
+			</div>
 		</div>
+
 	</div> 
 </div>
 <div class="user-wrap">

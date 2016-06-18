@@ -56,6 +56,9 @@ li {
 	border: none;
 }
 
+/**
+ *****登录弹窗*****
+ */
 .login-btn {
 	position: fixed;
 	width: 50px;
@@ -93,7 +96,6 @@ li {
 
 }
 .dialog-wrap {
-
 	display: -webkit-flex;
     display: -ms-flexbox;
     display: -webkit-box;
@@ -120,7 +122,6 @@ li {
 
 }
 .login-item {
-	/* position: absolute; */
     z-index: 10002;
     width: 420px;
     max-width: 100%;
@@ -145,6 +146,41 @@ li {
     margin: -10px 0 0 -10px;
     background: url(../img/msg_close.png) 0 0 no-repeat;
 }
+.login-err {
+	color: red;
+	text-align: center;
+	margin-bottom: 10px;
+}
+
+#username, #password, #email, 
+#RUsername, #REmail, #RPassword {
+	height: 30px;
+	width: 100%;
+	margin-bottom: 15px;
+}
+.login-sub {
+	text-align: center;
+}
+.login-sub button {
+	border: none;
+	padding: 5px;
+}
+.register-wrap {
+	display: none;
+}
+.register-sub {
+	text-align: center;
+}
+#RegisterBtn {
+	width: 50px;
+	border: none;
+	padding: 5px;
+
+}
+
+/**
+ *****主体内容*****
+ */
 .content {
 	/* width: 100%; */
 	/* text-align: center; */
@@ -212,18 +248,6 @@ li {
 	display: none;
 }
 
-#username, #password {
-	height: 30px;
-	width: 100%;
-	margin-bottom: 15px;
-}
-.login-sub {
-	text-align: center;
-}
-.login-sub button {
-	border: none;
-	padding: 5px;
-}
 .main-footer .time {
 	font-size: 14px;
 }

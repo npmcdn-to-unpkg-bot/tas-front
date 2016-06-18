@@ -56,7 +56,7 @@ $(function() {
 	//read 
 	$.ajax({
 		method: 'GET',
-		url: 'http://localhost:3000/api/v1/read/item',
+		url: 'http://localhost:3000/api/v1/read/item?tk=' + localStorage.getItem('token'),
 		success: function(data) {
 			console.log(data);
 			renderData(data);
@@ -202,7 +202,7 @@ $(function() {
     function　initData() {
     	var userInfo = JSON.parse(window.localStorage.getItem('userInfo'));
     	console.log(userInfo);
-    	if(userInfo.username) {
+    	if(userInfo && userInfo.username) {
     		$('.login-btn').text(userInfo.username);
     		$('.login-btn').off('click');
     	} else {

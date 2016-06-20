@@ -1,7 +1,7 @@
 $(function() {
 
 	$('.close-btn i').click(function() {
-		$('.dialog-wrap, .dialog-bg').remove();
+		$('.dialog-wrap, .dialog-bg').hide();
 	});
 
 	$('#loginBtn').click(function() {
@@ -206,7 +206,7 @@ $(function() {
     	var userInfo = JSON.parse(window.localStorage.getItem('userInfo'));
     	if(userInfo && userInfo.username) {
     		$('.login-btn').text(userInfo.username);
-    		$('.login-btn').off('click');
+    		// $('.login-btn').off('click');
     	} else {
     		$('body').on('click', '.login-btn', function() {
 				$('.dialog-bg').show();
@@ -262,8 +262,9 @@ $(function() {
 					// $('.dialog-wrap, .dialog-bg').remove();
 					// $('.login-btn').off('click').text(data.data.username);
 				} else {
-					var html = '<div class="login-err">用户名或密码错误</div>';
-					$('.login-sub').before(html);
+					$('.login-err').remove();
+					var html = '<div class="login-err">' + data.msg + '</div>';
+					$('.register-sub').before(html);
 				}
 			},
 			error: function(err) {

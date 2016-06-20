@@ -24,8 +24,6 @@ $(function() {
 					localStorage.setItem('token', data.token);
 					localStorage.setItem('userInfo', JSON.stringify(data.data));
 					window.location.reload();
-					// $('.dialog-wrap, .dialog-bg').remove();
-					// $('.login-btn').off('click').text(data.data.username);
 				} else {
 					var html = '<div class="login-err">用户名或密码错误</div>';
 					$('.login-sub').before(html);
@@ -37,8 +35,25 @@ $(function() {
 		})
 	});
 
+	//check is login
+	// only front end
+	function isLogin() {
+    	var userInfo = JSON.parse(window.localStorage.getItem('userInfo'));
+    	var token = window.localStorage.getItem('token');
+
+    	if(userInfo && userInfo.username && token) {
+    		return true;
+    	} else {
+    		return false;
+    	}
+	}
 	//say 
 	$('.send').click(function() {
+		if(!isLogin()) {
+			$('.login-btn').trigger('click');
+			return false;
+		}
+
 		var data = {
 			content: $('.main-content').val(),
 			token: localStorage.getItem('token')
@@ -49,6 +64,9 @@ $(function() {
 			url: 'http://localhost:3000/api/v1/say/item',
 			data: data,
 			success: function(data) {
+				if(data.code == 200) {
+					window.location.reload();
+				}
 				console.log('success');
 			},
 			error: function(err) {
@@ -152,6 +170,10 @@ $(function() {
 
     //upVote 
     $('body').on('click', '.like-0 .up-vote', function() {
+    	if(!isLogin()) {
+			$('.login-btn').trigger('click');
+			return false;
+		}
     	var data = {
     		uuid: $(this).parents('.tas-item').data('id'),
     		token: localStorage.getItem('token')
@@ -173,6 +195,10 @@ $(function() {
 
     //downVote 
     $('body').on('click', '.like-0 .down-vote', function() {
+    	if(!isLogin()) {
+			$('.login-btn').trigger('click');
+			return false;
+		}
     	var data = {
     		uuid: $(this).parents('.tas-item').data('id'),
     		token: localStorage.getItem('token')

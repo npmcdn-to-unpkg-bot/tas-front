@@ -105,6 +105,8 @@ $(function() {
 								+ '<div class="main-content">'
 									+ '{{if value.type == "image"}}'
 										+ '<img class="item-image" src="{{value.url}}">'
+									+ '{{ else if value.type == "url" }}'
+										+ '<a href="{{value.url}}" class="item-url">{{value.title}}</a>'
 									+ '{{else}}'
 										+ '{{value.content}}'
 									+ '{{/if}}'
@@ -129,10 +131,36 @@ $(function() {
 
 	    	isAnimated: true
 	    });
+
+		$('.tas-item').hammer().on('press', function(event) {
+			var $that = $(this);
+
+			$that.addClass('animate');
+
+			layer.confirm('你确定要删除？', {
+			  btn: ['取消','删除'] //按钮
+			}, function(){
+				layer.close(1);
+				$that.removeClass('animate');
+			}, function() {
+				
+			  layer.msg('也可以这样', {
+			    time: 20000, //20s后自动关闭
+			    btn: ['明白了', '知道了']
+			  });
+			});
+			
+		})
 		// var html = template('item', data);
 		// document.getElementById('tasGroup').innerHTML = html;
 
 	}
+
+	$(document).keyup(function(e) {
+	  	if (e.keyCode === 27) { //esc
+	  		$('.tas-item').removeClass('animate');
+	 	}
+	});
 
     function handleDragOver(evt) {
         evt.stopPropagation();
@@ -298,6 +326,15 @@ $(function() {
 			}
 		})
 	});
+
+	//删除操作
+	// $('.tas-group').hammer({
+	// 	time: 1000,
+ //        stop_browser_behavior: { userSelect: "" }
+	// }).on('press', '.tas-item', function(event) {
+	// 	console.log($(this));
+	// 	$(this).addClass('animate');
+	// })
 
 
 });

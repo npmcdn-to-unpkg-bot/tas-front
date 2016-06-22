@@ -251,3 +251,41 @@ li {
 .main-footer .time {
 	font-size: 14px;
 }
+
+/**
+ ***** item *****
+ */
+.confirm {
+	width: 40px;
+	height: 15px;
+	background: red;
+	position: absolute;
+	top: 0;
+	right: 0;
+	/* animation: none; */
+	/* display: none; */
+}
+
+/* keyframes scaleConfirmBox for .confirm animate */
+@-webkit-keyframes scaleConfirmBox{
+    0%{
+        -webkit-transform:scale(0.1);
+        opacity: 0;
+    }
+    100%{
+        -webkit-transform:scale(1);
+        opacity: 1;
+    }
+}
+@-moz-keyframes scaleConfirmBox{
+    0%{
+        -moz-transform:scale(0.1);
+        opacity: 0;
+    }
+    100%{
+        -moz-transform:scale(1);
+        opacity: 1;
+    }
+}
+
+/* https://segmentfault.com/q/1010000004376590 */

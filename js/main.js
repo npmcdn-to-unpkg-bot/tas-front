@@ -92,7 +92,7 @@ $(function() {
 	//el ID
 	function renderData(data) {
 		var source = '{{each data as value index}}'
-						+ '<li class="tas-item like-{{value.isUp + value.isDown}}" data-id={{value.uuid}}>'
+						+ '<li class="tas-item like-{{value.isUp + value.isDown}}" data-tk="{{value.token}}" data-id="{{value.uuid}}">'
 							+ '<div class="main">'
 								+ '<div class="main-header">'
 									+ '{{value.u_name}}'
@@ -107,6 +107,11 @@ $(function() {
 										+ '<img class="item-image" src="{{value.url}}">'
 									+ '{{ else if value.type == "url" }}'
 										+ '<a href="{{value.url}}" class="item-url">{{value.title}}</a>'
+									+ '{{ else if value.type == "taobao"}}'
+										+ '<img class="item-image" src="http:{{value.cover_img}}">'
+										+ '<div class="goods-title" title="{{value.title}}">{{value.title}}</div>'
+										+ '<div class="goods-price">价格{{value.price}}</div>'
+										+ '<div class="goods-ref">淘宝</div>'
 									+ '{{else}}'
 										+ '{{value.content}}'
 									+ '{{/if}}'
@@ -139,11 +144,11 @@ $(function() {
 
 			layer.confirm('你确定要删除？', {
 			  btn: ['取消','删除'] //按钮
-			}, function(){
+			}, function() {
 				layer.close(1);
 				$that.removeClass('animate');
 			}, function() {
-				
+
 			  layer.msg('也可以这样', {
 			    time: 20000, //20s后自动关闭
 			    btn: ['明白了', '知道了']

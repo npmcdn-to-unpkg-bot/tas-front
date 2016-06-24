@@ -102,16 +102,18 @@ $(function() {
 									+ '<div class="down-vote down-{{value.isDown}}"><span class="down-num">{{value.down}}</span>摇头</div>'
 									+ '<div class="clear"></div>'
 								+ '</div>'
-								+ '<div class="main-content">'
+								+ '<div class="main-content" data-url="{{value.url}}">'
 									+ '{{if value.type == "image"}}'
 										+ '<img class="item-image" src="{{value.url}}">'
 									+ '{{ else if value.type == "url" }}'
 										+ '<a href="{{value.url}}" class="item-url">{{value.title}}</a>'
 									+ '{{ else if value.type == "taobao"}}'
-										+ '<img class="item-image" src="http:{{value.cover_img}}">'
-										+ '<div class="goods-title" title="{{value.title}}">{{value.title}}</div>'
-										+ '<div class="goods-price">价格{{value.price}}</div>'
-										+ '<div class="goods-ref">淘宝</div>'
+										+ '<a href="{{value.url}}"> <img class="item-image" src="http:{{value.cover_img}}"></a>'
+										+ '<a href="{{value.url}}" class="goods-title" title="{{value.title}}">{{value.title}}</a>'
+										+ '<div class="goods-price">'
+											+ '￥{{value.price}}'
+											+ '<div class="goods-ref">淘宝</div>'
+										+ '</div>'
 									+ '{{else}}'
 										+ '{{value.content}}'
 									+ '{{/if}}'
@@ -141,19 +143,7 @@ $(function() {
 			var $that = $(this);
 
 			$that.addClass('animate');
-
-			layer.confirm('你确定要删除？', {
-			  btn: ['取消','删除'] //按钮
-			}, function() {
-				layer.close(1);
-				$that.removeClass('animate');
-			}, function() {
-
-			  layer.msg('也可以这样', {
-			    time: 20000, //20s后自动关闭
-			    btn: ['明白了', '知道了']
-			  });
-			});
+			deleteItem($that);
 			
 		})
 		// var html = template('item', data);
@@ -333,13 +323,36 @@ $(function() {
 	});
 
 	//删除操作
-	// $('.tas-group').hammer({
-	// 	time: 1000,
- //        stop_browser_behavior: { userSelect: "" }
-	// }).on('press', '.tas-item', function(event) {
-	// 	console.log($(this));
-	// 	$(this).addClass('animate');
-	// })
+	function deleteItem($that) {
+		layer.confirm('你确定要删除？', {
+			  btn: ['取消','删除'] //按钮
+			}, function() {
+				layer.close(1);
+				$that.removeClass('animate');
+			}, function() {
+				data = {
+					u_token: window.localStorage.getItem('token'),
+					i_token: $that.data('tk')
+				};
+				$.ajax({
+					url: 'http://localhost:3000/api/v1/delete/item',
+					method: 'POST',
+					data: data,
+					success: function(data) {
+						if(data.code == 200) {
+							console.log('delete item success');
+							$that.remove();
+							$('.tas-group').masonry();
+						} else {
+							console.log(data);
+						}
+					},
+					fail: function(err) {
+						console.log('delete item error');
+					}
+				})
+			});
+	}
 
 
 });

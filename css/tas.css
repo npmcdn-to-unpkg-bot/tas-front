@@ -261,7 +261,14 @@ li {
  ***** taobao *****
  */
 .goods-title {
+	width: 100%;
+	display: inline-block;
 	overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    margin: 10px 0;
+}
+.goods-ref {
+	display: inline-block;
+	float: right;
 }

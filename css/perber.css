@@ -35,12 +35,11 @@
     font-size: 18px;
     font-family: "Roboto", "Helvetica", "Arial", sans-serif!important;
     font-weight: 300;
-    padding-top: 0;
 }
 
 /* image upload*/
 .chat-input.dragOver{
-    /*background-color: #ccc;*/
+    background-color: #ccc;
     background: none;
 }
 .chat-input.dragOver:before{

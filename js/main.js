@@ -161,7 +161,7 @@ $(function() {
         evt.stopPropagation();
         evt.preventDefault();
         $dropZone.addClass('dragOver');
-        $('.say-zone').css('visibility', 'hidden');
+        // $('.say-zone').css('visibility', 'hidden');
         evt.dataTransfer.dropEffect = 'copy'; // Explicitly show this is a copy.
     }
 
@@ -169,16 +169,16 @@ $(function() {
 
         evt.stopPropagation();
         evt.preventDefault();
-        $('.say-zone').css('visibility', 'visible');
+        // $('.say-zone').css('visibility', 'visible');
 
-        $dropZone.removeClass('dragOver');
+        // $dropZone.removeClass('dragOver');
 
     }
 
-    function handleDragLeave(evt){
+    function handleDragLeave(evt) {
         evt.stopPropagation();
         evt.preventDefault();
-        $('.say-zone').css('visibility', 'visible');
+        // $('.say-zone').css('visibility', 'visible');
 
         $dropZone.removeClass('dragOver');
     }

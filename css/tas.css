@@ -223,6 +223,9 @@ li {
 	line-height: 30px;
 	background: #f3f3f3;
 }
+.up-vote {
+	border-left: none;
+}
 
 .like-0 .up-vote:hover, .like-0 .down-vote:hover {
 	background: #ccc;

@@ -55,9 +55,14 @@ $(function() {
 		}
 
 		var data = {
-			content: $('.main-content').val(),
+			content: $.trim($('.main-content').val()),
 			token: localStorage.getItem('token')
 		};
+
+		if(data.content.length < 5) {
+			toast('zhishaowugezifu');
+			return false;
+		}
 
 		$.ajax({
 			method: 'POST',
@@ -161,7 +166,6 @@ $(function() {
         evt.stopPropagation();
         evt.preventDefault();
         $dropZone.addClass('dragOver');
-        // $('.say-zone').css('visibility', 'hidden');
         evt.dataTransfer.dropEffect = 'copy'; // Explicitly show this is a copy.
     }
 
@@ -169,9 +173,6 @@ $(function() {
 
         evt.stopPropagation();
         evt.preventDefault();
-        // $('.say-zone').css('visibility', 'visible');
-
-        // $dropZone.removeClass('dragOver');
 
     }
 
@@ -287,9 +288,23 @@ $(function() {
 
 	 //注册数据　
 	$('#RegisterBtn').click(function() {
-		var username = $('#RUsername').val();
-		var password = $('#RPassword').val();
-		var email = $('#REmail').val();
+		var username = $.trim($('#RUsername').val());
+		var password = $.trim($('#RPassword').val());
+		var email = $.trim($('#REmail').val());
+
+		if(username.length < 3) {
+			toast('user name 3 length');
+			return false;
+		}
+		if(password.length < 6) {
+			toast('password must 6 length');
+			return false;
+		}
+		var mailReg = /^([a-zA-Z0-9]+[_|_|.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|_|.]?)*[a-zA-Z0-9]+.[a-zA-Z]{2,4}$/;
+		if(!mailReg.test(email)) {
+			toast('input right email');
+			return false;
+		}
 
 		var data = {
 			username: username,
@@ -307,9 +322,7 @@ $(function() {
 					$('.login-item').remove();
 					localStorage.setItem('token', data.token);
 					localStorage.setItem('userInfo', JSON.stringify(data.data));
-					// window.location.reload();
-					// $('.dialog-wrap, .dialog-bg').remove();
-					// $('.login-btn').off('click').text(data.data.username);
+					window.location.reload();
 				} else {
 					$('.login-err').remove();
 					var html = '<div class="login-err">' + data.msg + '</div>';
@@ -355,4 +368,13 @@ $(function() {
 	}
 
 
+//common
+
+	function toast(text) {
+		layer.msg(text, {
+			time: 1500
+		}, function() {
+			console.log('test');
+		});
+	}
 });

@@ -81,11 +81,15 @@
 			</div>
 		</div>
 
-	</div> 
+	</div>
 </div>
 <div class="user-wrap">
 		<span class="login-name"></span>
 </div>
+<div class="next-page">
+	next
+</div>
+
 <script type="text/html" id="item">
 {{each data as value index}}
 	<li class="tas-item like-{{value.isUp + value.isDown}}" data-id={{value.uuid}}>
@@ -196,7 +200,7 @@
 		                   		console.log(data);
 		                   	},
 		                   	error: function(err) {
-		                   		
+
 		                   	}
 	                   })
 	            },

@@ -11,7 +11,7 @@ $(function() {
 		var data = {
 			username: username,
 			password: password
-		}
+		};
 
 		$.ajax({
 			method: 'POST',
@@ -47,7 +47,7 @@ $(function() {
     		return false;
     	}
 	}
-	//say 
+	//say
 	$('.send').click(function() {
 		if(!isLogin()) {
 			$('.login-btn').trigger('click');
@@ -60,7 +60,7 @@ $(function() {
 		};
 
 		if(data.content.length < 5) {
-			toast('zhishaowugezifu');
+			toast('至少五个字');
 			return false;
 		}
 
@@ -80,19 +80,19 @@ $(function() {
 		})
 	});// end say
 
-	//read 
-	$.ajax({
-		method: 'GET',
-		url: 'http://localhost:3000/api/v1/read/item?tk=' + localStorage.getItem('token'),
-		success: function(data) {
-			console.log(data);
-			renderData(data);
-		},
-		error: function(err) {
-			console.log(err);
-		}
-	});
-
+	// //read
+	// $.ajax({
+	// 	method: 'GET',
+	// 	url: 'http://localhost:3000/api/v1/read/item?tk=' + localStorage.getItem('token'),
+	// 	success: function(data) {
+	// 		console.log(data);
+	// 		renderData(data);
+	// 	},
+	// 	error: function(err) {
+	// 		console.log(err);
+	// 	}
+	// });
+pagination();
 	//render items
 	//el ID
 	function renderData(data) {
@@ -136,21 +136,23 @@ $(function() {
 		document.getElementById('tasGroup').innerHTML = html;
 		// setHeight();
 
-		$('.tas-group').masonry({
-	    	itemSelector: '.tas-item',
-	    	columnWidth: 240,
-	    	gutter: 10,
-
-	    	isAnimated: true
-	    });
+		// $('.tas-group').masonry({
+	  //   	itemSelector: '.tas-item',
+	  //   	columnWidth: 240,
+	  //   	gutter: 10,
+		//
+	  //   	isAnimated: true
+	  //   });
 
 		$('.tas-item').hammer().on('press', function(event) {
 			var $that = $(this);
 
 			$that.addClass('animate');
 			deleteItem($that);
-			
+
 		})
+
+		// nextPage();
 		// var html = template('item', data);
 		// document.getElementById('tasGroup').innerHTML = html;
 
@@ -170,10 +172,8 @@ $(function() {
     }
 
     function handleFileSelect(evt) {
-
         evt.stopPropagation();
         evt.preventDefault();
-
     }
 
     function handleDragLeave(evt) {
@@ -183,16 +183,16 @@ $(function() {
 
         $dropZone.removeClass('dragOver');
     }
-   
-   	//drop upload image
-	var dropZone = document.getElementById('dropZone');
-	var $dropZone = $('#dropZone');
 
-	dropZone.addEventListener('dragover', handleDragOver, false);
+   	//drop upload image
+		var dropZone = document.getElementById('dropZone');
+		var $dropZone = $('#dropZone');
+
+		dropZone.addEventListener('dragover', handleDragOver, false);
     dropZone.addEventListener('dragleave', handleDragLeave, false);
     dropZone.addEventListener('drop', handleFileSelect, false);
 
-    //upVote 
+    //upVote
     $('body').on('click', '.like-0 .up-vote', function() {
     	if(!isLogin()) {
 			$('.login-btn').trigger('click');
@@ -217,7 +217,7 @@ $(function() {
     	});
     });
 
-    //downVote 
+    //downVote
     $('body').on('click', '.like-0 .down-vote', function() {
     	if(!isLogin()) {
 			$('.login-btn').trigger('click');
@@ -249,7 +249,7 @@ $(function() {
 	    for(var i = 4; i < $item.length; i++) {
 	    	console.log(i);
 	    	$item.eq(i).css('top', $item.eq(i-4).outerHeight() + 110 );
-	    }    	
+	    }
     }
 
     function　initData() {
@@ -282,7 +282,7 @@ $(function() {
 	    	$('.toggle-tip').data('login', 1);
 	    	$('.register-wrap').hide();
 	 		$('.login-wrap').show();
-	    	$(this).text('立即注册');	
+	    	$(this).text('立即注册');
 	 	}
 	 })
 
@@ -367,9 +367,34 @@ $(function() {
 			});
 	}
 
-
+	//分页操作
+	function pagination(num) {
+		if(!num) {
+			var num = 0;
+			window.localStorage.setItem('currentPage', 0);
+		}
+		// var num = num || 0;
+		var param = 'tk=' + localStorage.getItem('token') + '&num=' + num;
+		$.ajax({
+			method: 'GET',
+			url: 'http://localhost:3000/api/v1/read/item?' + param,
+			success: function(data) {
+				renderData(data);
+				$('.tas-group').masonry().masonry('destroy');
+				$('.tas-group').masonry().masonry('remove', '.tas-item');
+				$('.tas-group').masonry({
+					itemSelector: '.tas-item',
+					columnWidth: 240,
+					gutter: 10,
+					isAnimated: true
+				});
+			},
+			error: function(err) {
+				console.log(err);
+			}
+		})
+	}
 //common
-
 	function toast(text) {
 		layer.msg(text, {
 			time: 1500
@@ -377,4 +402,17 @@ $(function() {
 			console.log('test');
 		});
 	}
+
+//翻页操作
+// function nextPage() {
+
+	$('.next-page').click(function() {
+		var currentPage = window.localStorage.getItem('currentPage') || 0;
+		var nextPage = parseInt(currentPage) + 1;
+		pagination(nextPage);
+
+		window.localStorage.setItem('currentPage', nextPage);
+	});
+// }
+
 });

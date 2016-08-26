@@ -1,4 +1,5 @@
-$(function() {
+// http://blog.codebusters.pl/en/images-height-and-position-problem-masonry-isotope/
+$(window).load(function() {
 
 	$('.close-btn i').click(function() {
 		$('.dialog-wrap, .dialog-bg').hide();
@@ -92,7 +93,6 @@ $(function() {
 	// 		console.log(err);
 	// 	}
 	// });
-pagination();
 	//render items
 	//el ID
 	function renderData(data) {
@@ -111,7 +111,7 @@ pagination();
 									+ '{{if value.type == "image"}}'
 										+ '<img class="item-image" src="{{value.url}}">'
 									+ '{{ else if value.type == "url" }}'
-										+ '<a href="{{value.url}}" class="item-url">{{value.title}}</a>'
+										+ '<a href="{{value.url}}" class="item-url">{{value.title}} <i class="fa fa-link" aria-hidden="true"></i></a>'
 									+ '{{ else if value.type == "taobao"}}'
 										+ '<a href="{{value.url}}"> <img class="item-image" src="http:{{value.cover_img}}"></a>'
 										+ '<a href="{{value.url}}" class="goods-title" title="{{value.title}}">{{value.title}}</a>'
@@ -134,15 +134,6 @@ pagination();
 		var render = template.compile(source);
 		var html = render(data);
 		document.getElementById('tasGroup').innerHTML = html;
-		// setHeight();
-
-		// $('.tas-group').masonry({
-	  //   	itemSelector: '.tas-item',
-	  //   	columnWidth: 240,
-	  //   	gutter: 10,
-		//
-	  //   	isAnimated: true
-	  //   });
 
 		$('.tas-item').hammer().on('press', function(event) {
 			var $that = $(this);
@@ -151,10 +142,6 @@ pagination();
 			deleteItem($that);
 
 		})
-
-		// nextPage();
-		// var html = template('item', data);
-		// document.getElementById('tasGroup').innerHTML = html;
 
 	}
 
@@ -247,7 +234,6 @@ pagination();
     	var $item = $('.tas-item');
 
 	    for(var i = 4; i < $item.length; i++) {
-	    	console.log(i);
 	    	$item.eq(i).css('top', $item.eq(i-4).outerHeight() + 110 );
 	    }
     }
@@ -256,7 +242,6 @@ pagination();
     	var userInfo = JSON.parse(window.localStorage.getItem('userInfo'));
     	if(userInfo && userInfo.username) {
     		$('.login-btn').text(userInfo.username);
-    		// $('.login-btn').off('click');
     	} else {
     		$('body').on('click', '.login-btn', function() {
 				$('.dialog-bg').show();
@@ -265,7 +250,8 @@ pagination();
     	}
     }
 
-    initData();
+    initData();	
+	pagination();
 
     /**
 	 * 登录注册操作
@@ -403,8 +389,7 @@ pagination();
 		});
 	}
 
-//翻页操作
-// function nextPage() {
+	// 翻页操作
 
 	$('.next-page').click(function() {
 		var currentPage = window.localStorage.getItem('currentPage') || 0;
@@ -413,6 +398,5 @@ pagination();
 
 		window.localStorage.setItem('currentPage', nextPage);
 	});
-// }
 
 });

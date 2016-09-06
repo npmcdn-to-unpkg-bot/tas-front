@@ -81,18 +81,6 @@ $(window).load(function() {
 		})
 	});// end say
 
-	// //read
-	// $.ajax({
-	// 	method: 'GET',
-	// 	url: 'http://localhost:3000/api/v1/read/item?tk=' + localStorage.getItem('token'),
-	// 	success: function(data) {
-	// 		console.log(data);
-	// 		renderData(data);
-	// 	},
-	// 	error: function(err) {
-	// 		console.log(err);
-	// 	}
-	// });
 	//render items
 	//el ID
 	function renderData(data) {
@@ -339,7 +327,6 @@ $(window).load(function() {
 					data: data,
 					success: function(data) {
 						if(data.code == 200) {
-							console.log('delete item success');
 							$that.remove();
 							$('.tas-group').masonry();
 						} else {
@@ -366,14 +353,20 @@ $(window).load(function() {
 			url: 'http://localhost:3000/api/v1/read/item?' + param,
 			success: function(data) {
 				renderData(data);
-				$('.tas-group').masonry().masonry('destroy');
-				$('.tas-group').masonry().masonry('remove', '.tas-item');
-				$('.tas-group').masonry({
-					itemSelector: '.tas-item',
-					columnWidth: 240,
-					gutter: 10,
-					isAnimated: true
-				});
+				// http://imagesloaded.desandro.com/
+				// 防止图片资源加载问题的高度折叠
+				$('.tas-group').imagesLoaded(function () {
+
+					$('.tas-group').masonry().masonry('destroy');
+					$('.tas-group').masonry().masonry('remove', '.tas-item');
+					$('.tas-group').masonry({
+						itemSelector: '.tas-item',
+						columnWidth: 240,
+						gutter: 10,
+						isAnimated: true
+					});
+				})
+
 			},
 			error: function(err) {
 				console.log(err);

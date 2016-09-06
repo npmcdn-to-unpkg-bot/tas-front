@@ -11,28 +11,18 @@
 <body>
 
 <div class="wrap">
-<div class="login-btn btn">Login</div>
-<!-- <div id="dropZone" data-bucket="perber" class="chat-input">
-	<div class="ui form ">
-		<div class="field say-zone">
-			<textarea placeholder="说点什么？" class="say-zone main-content" maxlength="240"></textarea>
+	<div class="login-btn btn">Login</div>
+
+	<div id="dropZone" data-bucket="perber" class="chat-input">
+		<div class="ui form">
+			<div class="field">
+				<textarea placeholder="说点什么？" class="say-zone main-content" maxlength="240"></textarea>
+			</div>
+			<button class="send">OK</button>
+
 		</div>
-		<button class="send">OK</button>
-
+		<div id="upimg"></div>
 	</div>
-	<div id="upimg"></div>
-</div> -->
-
-<div id="dropZone" data-bucket="perber" class="chat-input">
-	<div class="ui form">
-		<div class="field">
-			<textarea placeholder="说点什么？" class="say-zone main-content" maxlength="240"></textarea>
-		</div>
-		<button class="send">OK</button>
-
-	</div>
-	<div id="upimg"></div>
-</div>
 
 
 
@@ -41,15 +31,6 @@
 
 		</ul>
 	</div>
-	<!-- <iframe frameborder="no"
-					border="0"
-					class="net-frame"
-					marginwidth="0"
-					marginheight="0"
-					width=330
-					height=86
-					src="http://music.163.com/outchain/player?type=2&id=26188043&auto=0&height=66">
-	</iframe> -->
 
 </div>
 <div class="dialog-bg"></div>
@@ -58,7 +39,7 @@
 	<div class="tas-item login-item">
 
 		<div class="close-btn btn">
-			<span class="toggle-tip" data-login="1">立即注册</span>
+			<span class="toggle-tip" data-login="1">注册</span>
 			<i></i>
 		</div>
 		<div class="login-wrap">
@@ -69,7 +50,7 @@
 				<input type="password" name="password" placeholder="输入密码" id="password" />
 			</div>
 			<div class="login-sub">
-				<button id="loginBtn">登录</button>
+				<button id="loginBtn" class="btn-default">登录</button>
 			</div>
 		</div>
 
@@ -146,6 +127,7 @@
 <script type="text/javascript" src="js/lib/jquery.hammer.js"></script>
 <script type="text/javascript" src="js/lib/layer/layer.js"></script>
 <script type="text/javascript" src="js/tpl.helper.js"></script>
+<script src="https://npmcdn.com/imagesloaded@4.1/imagesloaded.pkgd.min.js"></script>
 <script type="text/javascript" src="js/main.js"></script>
 <script type="text/javascript">
 

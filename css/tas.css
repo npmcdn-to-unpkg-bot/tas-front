@@ -44,13 +44,17 @@ li {
 	max-width: 200px;
 	padding: 0;
 	font-size: 18px;
-	background: #BFBFBF;
+	background: #dee9f5;
 	box-sizing: border-box;
+	cursor: pointer;
 	vertical-align: top;
 	border: none;
 	position: fixed;
 	top: 0;
 	right: 0;
+}
+.send:hover {
+	background: #4bbdb8;
 }
 
 /**
@@ -118,18 +122,9 @@ li {
 	display: none;
 
 }
-.login-item {
-    z-index: 10002;
-    width: 420px;
-    max-width: 100%;
-    border-radius: 8px;
-    border: 1px solid #888;
-    box-shadow: 0 0 80px 0 rgba(0,0,0,.4);
-    background: #fff;
-    text-align: left;
-}
+
 .close-btn {
-	height: 25px;
+	min-height: 25px;
 	width: 100%;
 	position: relative;
 }
@@ -158,10 +153,10 @@ li {
 .login-sub {
 	text-align: center;
 }
-.login-sub button {
+/*.login-sub button {
 	border: none;
 	padding: 5px;
-}
+}*/
 .register-wrap {
 	display: none;
 }
@@ -303,8 +298,53 @@ li {
 	line-height: 60px;
 	text-align: center;
 	position: fixed;
-	top: 0;
+	top: 50%;
 	z-index: 9999999;
 	right: 0;
 	background: #ccc;
+	box-shadow: 2px 3px 3px #CCC;
+	cursor: pointer;
+	color: #FFF;
+	font-weight: 600;
+	font-size: 20px;
+}
+.next-page:hover {
+	background: #999;
+}
+
+
+/**
+ ****** login dialog ******
+ */
+.login-item {
+    z-index: 10002;
+    width: 420px;
+    padding: 20px;
+    max-width: 100%;
+    border-radius: 8px;
+    border: 1px solid #888;
+    box-shadow: 0 0 80px 0 rgba(0,0,0,.4);
+    background: #fff;
+    text-align: left;
+}
+.toggle-tip {
+	cursor: pointer;
+	margin: 10px 0;
+	display: inline-block;
+	background: #eaeaea;
+	padding: 3px;
+	border-radius: 3px;
+}
+.btn-default {
+	color: #333;
+    background-color: #fff;
+    border: 1px solid #888;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.btn-default:hover {
+	color: #333;
+    background-color: #e6e6e6;
+    border-color: #adadad;
 }

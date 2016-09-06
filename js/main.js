@@ -1,6 +1,8 @@
 // http://blog.codebusters.pl/en/images-height-and-position-problem-masonry-isotope/
 $(window).load(function() {
 
+	var BaseUrl = 'http://127.0.0.1:3000';
+
 	$('.close-btn i').click(function() {
 		$('.dialog-wrap, .dialog-bg').hide();
 	});
@@ -16,7 +18,7 @@ $(window).load(function() {
 
 		$.ajax({
 			method: 'POST',
-			url: 'http://localhost:3000/api/v1/user/login',
+			url: BaseUrl + '/api/v1/user/login',
 			data: data,
 			success: function(data) {
 				console.log(data);
@@ -67,7 +69,7 @@ $(window).load(function() {
 
 		$.ajax({
 			method: 'POST',
-			url: 'http://localhost:3000/api/v1/say/item',
+			url: BaseUrl + '/api/v1/say/item',
 			data: data,
 			success: function(data) {
 				if(data.code == 200) {
@@ -180,7 +182,7 @@ $(window).load(function() {
     	$.ajax({
     		method: 'POST',
     		data: data,
-    		url: 'http://localhost:3000/api/v1/upVote/item',
+    		url: BaseUrl + '/api/v1/upVote/item',
     		success: function(data) {
     			console.log(data);
     			console.log('success');
@@ -205,7 +207,7 @@ $(window).load(function() {
     	$.ajax({
     		method: 'POST',
     		data: data,
-    		url: 'http://localhost:3000/api/v1/downVote/item',
+    		url: BaseUrl + '/api/v1/downVote/item',
     		success: function(data) {
     			console.log(data);
     			console.log('success');
@@ -288,7 +290,7 @@ $(window).load(function() {
 
 		$.ajax({
 			method: 'POST',
-			url: 'http://localhost:3000/api/v1/user/register',
+			url: BaseUrl + '/api/v1/user/register',
 			data: data,
 			success: function(data) {
 				console.log(data);
@@ -322,7 +324,7 @@ $(window).load(function() {
 					i_token: $that.data('tk')
 				};
 				$.ajax({
-					url: 'http://localhost:3000/api/v1/delete/item',
+					url: BaseUrl + '/api/v1/delete/item',
 					method: 'POST',
 					data: data,
 					success: function(data) {
@@ -350,7 +352,7 @@ $(window).load(function() {
 		var param = 'tk=' + localStorage.getItem('token') + '&num=' + num;
 		$.ajax({
 			method: 'GET',
-			url: 'http://localhost:3000/api/v1/read/item?' + param,
+			url: BaseUrl + '/api/v1/read/item?' + param,
 			success: function(data) {
 				renderData(data);
 				// http://imagesloaded.desandro.com/

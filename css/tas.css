@@ -348,3 +348,8 @@ li {
     background-color: #e6e6e6;
     border-color: #adadad;
 }
+
+/* 实验性质样式 */
+.tas-item:hover {
+	background: #d8d6d6;
+}

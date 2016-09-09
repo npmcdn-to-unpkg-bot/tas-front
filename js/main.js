@@ -1,7 +1,8 @@
 // http://blog.codebusters.pl/en/images-height-and-position-problem-masonry-isotope/
 $(window).load(function() {
 
-	var BaseUrl = 'http://localhost:3000';
+	// var BaseUrl = 'http://localhost:3000';
+	var BaseUrl = 'http://108.61.186.83:3000';
 
 	$('.close-btn i').click(function() {
 		$('.dialog-wrap, .dialog-bg').hide();
